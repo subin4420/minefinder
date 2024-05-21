@@ -46,8 +46,8 @@ function fillMine(arr, minenum = 4){
     }
     console.log(arr);
 }
-const a = createMinefield(4,4);
-fillMine(a, 4);
+const a = createMinefield(10,10);
+fillMine(a, 30);
 function handleCellClick(event) {
     const cell = event.target;
     const row = cell.getAttribute('data-row');
@@ -61,7 +61,7 @@ function handleCellClick(event) {
         cell.textContent = a[row][col].adjacentMines;
     }
 }
-adjacentMines(a);
+adjacentMines(a,10,10);
 function adjacentMines(mines,numRows=4,numCols=4){
     for(let i = 0;i < numRows;i++){
         for(let j = 0;j < numCols;j++){
@@ -90,7 +90,6 @@ function countMine(row,col,mines,numRows,numCols){
     });
 }
 
-console.log(a);
 function left_Click(){
 
 }

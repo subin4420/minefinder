@@ -14,6 +14,7 @@
 
 # 함수
 '''
+
 function Cell() //지뢰칸 생성 및 초기화
 function createMinefield(rows, cols) //Cell()을 이용해 rows cols 만큼의 2차원배열 생성 후 리턴
 function randomChooser(num, minenum) //num = 지뢰보드의 칸수, minenum= 지뢰의 개수

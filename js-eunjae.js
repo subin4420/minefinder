@@ -35,36 +35,28 @@ function getTimeFormatString(){
     return String(hour).padStart(2,'0') + ":" + String(min).padStart(2,'0') + ":" + String(sec).padStart(2,'0');
 }
 
-// 주변 지뢰 카운팅(8방향)
 
 
 let mines = [[0,0,0,0],["bomb",0,0,0],[0,"bomb",0,0],[0,0,0,0]];
 
-function create2DArray(rows, columns) {
-    var arr = new Array(rows);
-    for (var i = 0; i < rows; i++) {
-        arr[i] = new Array(columns);
+// 지뢰의 개수를 셀 2차원 배열 초기화 (인접폭탄 개수 세기)
+function adjacentMines(mines,numRows=4,numCols=4){
+    let board = Array.from(Array(numRows), ()=> Array(numCols).fill(0));
+
+    for(let i = 0;i < numRows;i++){
+        for(let j = 0;j < numCols;j++){
+            if (mines[i][j] == "bomb"){
+                countMine(i,j);
+            }
+            else{
+                continue;
+            }
+        }    
     }
-    return arr;
+    console.log(board);
+    return board
 }
 
-let numRows = 4;
-let numCols = 4;
-let board = Array.from(Array(numRows), ()=> Array(numCols).fill(0));
- 
-console.log(board);
-
-for(let i = 0;i < numRows;i++){
-    for(let j = 0;j < numCols;j++){
-        if (mines[i][j] == "bomb"){
-            countMine(i,j);
-        }
-        else{
-            continue;
-        }
-    }    
-}
-console.log(board);
 
 function countMine(row,col){
     const dxy = [[-1,-1],[-1,0],[-1,1],[0,-1],[0,1],[1,-1],[1,0],[1,1]];
@@ -80,15 +72,19 @@ function countMine(row,col){
             else if(mines[newRow][newCol] == 'bomb'){
                 board[newRow][newCol] = 'bomb';
             }
-            
         }
-        
     });
     return board
 }
 
-
 // reset(랜덤으로 지뢰 설정하는 것)
+const reset = document.getElementById("reset");
 
+function resetGame(){
+    resetClock();
+
+    adjacentMines(mines,numRows,numCols);
+
+}
 
 

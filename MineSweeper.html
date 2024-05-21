@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>지뢰 찾기</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin: 0;
+        }
+        h1 {
+            margin-bottom: 10px;
+        }
+        #controls {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .cell {
+            width: 30px;
+            height: 30px;
+            display: inline-block;
+            border: 1px solid #000;
+            text-align: center;
+            line-height: 30px;
+            cursor: pointer;
+            background-color: #ccc; /* 배경색 회색으로 변경 */
+        }
+        #minefield {
+            display: grid;
+            grid-template-columns: repeat(10, 30px);
+            grid-gap: 0px; /* 행과 행 사이의 간격 제거 */
+        }
+        #reset-button {
+            background: url('/img/smile.jpg') no-repeat center center;
+            background-size: cover;
+            width: 50px;
+            height: 50px;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>지뢰 찾기</h1>
+    <div id="controls">
+        <button id="reset-button"></button>
+        <div id="mine-count">Mines: 0</div>
+        <div id="timer">Time: 0s</div>
+    </div>
+    <div id="minefield"></div>
+    <script>
+        const rows = 10;
+        const cols = 10;
+        // 지뢰 찾기 게임판을 생성하는 함수
+        function createMinefield(rows, cols) {
+            const minefield = document.getElementById('minefield');
+            minefield.style.width = `${cols * 32}px`; // 셀 간격을 고려한 폭 설정
+            for (let row = 0; row < rows; row++) {
+                for (let col = 0; col < cols; col++) {
+                    const cell = document.createElement('div');
+                    cell.className = 'cell';
+                    cell.setAttribute('data-row', row);
+                    cell.setAttribute('data-col', col);
+                    minefield.appendChild(cell);
+                }
+            }
+        }
+       
+        // 지뢰 찾기 게임판 생성
+        createMinefield(rows, cols);
+    </script>
+</body>
+</html>
